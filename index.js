@@ -8,7 +8,7 @@ function generateItem(itemName) {
         <button class="js-shopping-item-toggle shopping-item-toggle">
           <span class="button-label">check</span>
         </button>
-        <button class="shopping-item-delete">
+        <button class="js-shopping-item-delete shopping-item-delete">
           <span class="button-label">delete</span>
         </button>
       </div>
@@ -32,12 +32,17 @@ function handleToggleItem() {
   });
 }
 
-
+function handleDeleteItem() {
+  $('.js-shopping-list').on('click', '.js-shopping-item-delete', function(event) {
+    $(this).closest('li').remove();
+  });
+}
 
 
 function main() {
   handleItemSubmit();
   handleToggleItem();
+  handleDeleteItem();
 }
 
 $(main);
