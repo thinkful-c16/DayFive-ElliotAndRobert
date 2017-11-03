@@ -22,14 +22,18 @@ function handleItemSubmit() {
     const itemName = $('.js-shopping-list-entry').val();
     const itemElement = generateItem(itemName);
     $('.js-shopping-list').append(itemElement);
+    itemName = $('.js-shopping-list-entry').val('');
   });
 }
 
 function handleToggleItem() {
   $('.js-shopping-list').on('click', '.js-shopping-item-toggle', function(event) {
-    $(event.target).closest('li').find('span.js-shopping-item').toggleClass('shopping-item__checked');
+    $(this).closest('li').find('span.js-shopping-item').toggleClass('shopping-item__checked');
   });
 }
+
+
+
 
 function main() {
   handleItemSubmit();
