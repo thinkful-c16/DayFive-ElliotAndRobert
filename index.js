@@ -1,6 +1,9 @@
 /* global $ */
 
 function generateItem(itemName) {
+  if (itemName === '') {
+    return; 
+  } else {
   return `
     <li>
       <span class="js-shopping-item shopping-item">${itemName}</span>
@@ -13,7 +16,7 @@ function generateItem(itemName) {
         </button>
       </div>
     </li>
-  `;
+  `;}
 }
 
 function handleItemSubmit() {
@@ -46,4 +49,4 @@ function main() {
 }
 
 $(main);
-
+//main();
