@@ -1,0 +1,4 @@
+/* global $ */
+
+console.log('hello');
+
