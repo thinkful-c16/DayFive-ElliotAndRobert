@@ -1,11 +1,12 @@
 'use strict';
 const STORE = [
-  {name: "apples", checked: false},
-  {name: "oranges", checked: false},
-  {name: "milk", checked: true},
-  {name: "bread", checked: false}
+  {name: "apples", checked: false, editing: false},
+  {name: "oranges", checked: false, editing: false},
+  {name: "milk", checked: true, editing: false},
+  {name: "bread", checked: false, editing: false}
 ];
 let hideChecked = false;
+let nowEditing = false;
 
 function generateItemElement(item, itemIndex) {
   if(item.name === '' || (hideChecked === true && item.checked === true)) {
@@ -13,7 +14,8 @@ function generateItemElement(item, itemIndex) {
   } else {
     return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
-      <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
+      <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''} 
+      ${nowEditing ? "editing" : ""}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle ${item.checked ? 'shopping-item-toggle__checked' : ''}">
           <span class="button-label">${item.checked ? 'uncheck' : 'check'}</span>
@@ -45,7 +47,7 @@ function renderShoppingList() {
   
 function addItemToShoppingList(itemName) {
   // console.log(`Adding "${itemName}" to shopping list`);
-  STORE.push({name: itemName, checked: false});
+  STORE.push({name: itemName, checked: false, editing: false});
 }
   
 function handleNewItemSubmit() {
@@ -108,6 +110,7 @@ function handleToggleHideChecked() {
 function handleEditItemClicked() {
   $('.js-shopping-list').on('click', `.js-item-edit`, event => {
     console.log('edit clicked');
+    nowEditing = true;
     renderShoppingList();
   });
 }

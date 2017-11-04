@@ -67,3 +67,10 @@ button:hover {
 .shopping-item-edit {
   color: blue;
 }
+
+.editing {
+  color: darkgrey;
+  width: 200px;
+  padding: 5px;
+  border: 1px solid darkgrey;
+}
