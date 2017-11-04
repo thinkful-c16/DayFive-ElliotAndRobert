@@ -78,6 +78,8 @@ const STORE = [
 
   function deleteListItem(itemIndex) {
     console.log("Deleted item at index " + itemIndex);
+    STORE.splice(itemIndex, 1);
+    console.log(STORE);
     //STORE[itemIndex].checked = !STORE[itemIndex].checked;
   }
   
