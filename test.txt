@@ -1,4 +1,4 @@
 Test text file — used for nothing but testing git.
 
 phone: 321-555-1684
-email: someone@gmail.com
+email: robert.v.frazier@gmail.com — contact-changes branch
