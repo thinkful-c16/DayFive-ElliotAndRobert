@@ -1,5 +1,0 @@
-Test text file — used for nothing but testing git.
-
-phone: 864-901-2268
-email: robert.v.frazier@gmail.com
-
