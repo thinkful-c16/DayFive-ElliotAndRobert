@@ -1,9 +1,9 @@
 'use strict';
 const STORE = [
-  /* {name: "apples", checked: false},
+  {name: "apples", checked: false},
   {name: "oranges", checked: false},
   {name: "milk", checked: true},
-   {name: "bread", checked: false} */
+  {name: "bread", checked: false}
 ];
 let hideChecked = false;
 
@@ -16,10 +16,13 @@ function generateItemElement(item, itemIndex) {
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
-          <span class="button-label">check</span>
+          <span class="button-label">${item.checked ? 'uncheck' : 'check'}</span>
         </button>
         <button class="shopping-item-delete js-item-delete">
           <span class="button-label">delete</span>
+        </button>
+        <button class="shopping-item-edit js-item-edit">
+          <span class="button-label">edit</span>
         </button>
       </div>
     </li>`;
@@ -97,7 +100,14 @@ function handleDeleteItemClicked() {
 function handleToggleHideChecked() {
   $('#js-hide-checked').change(function(){
     hideChecked = $(this).is(':checked')
-    console.log(hideChecked);
+    // console.log(hideChecked);
+    renderShoppingList();
+  });
+}
+
+function handleEditItemClicked() {
+  $('.js-shopping-list').on('click', `.js-item-edit`, event => {
+    console.log('edit clicked');
     renderShoppingList();
   });
 }
@@ -107,6 +117,7 @@ function handleShoppingList() {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
+  handleEditItemClicked();
   handleToggleHideChecked();
 }
   

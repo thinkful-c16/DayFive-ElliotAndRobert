@@ -8,6 +8,7 @@
   
   button, input[type="text"] {
     padding: 5px;
+    width: 80px;
   }
   
   button:hover {
@@ -40,7 +41,7 @@
   
   .shopping-item {
     display: block;
-    color: darkgrey;
+    color: purple;
     font-style: italic;
     font-size: 20px;
     margin-bottom: 15px;
@@ -48,4 +49,5 @@
   
   .shopping-item__checked {
     text-decoration: line-through;
+    color: green;
   }
