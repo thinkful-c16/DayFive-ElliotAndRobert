@@ -22,7 +22,7 @@ const STORE = [
   
   
   function generateShoppingItemsString(shoppingList) {
-    console.log("Generating shopping list element");
+    // console.log("Generating shopping list element");
   
     const items = shoppingList.map((item, index) => generateItemElement(item, index));
     
@@ -32,7 +32,7 @@ const STORE = [
   
   function renderShoppingList() {
     // render the shopping list in the DOM
-    console.log('`renderShoppingList` ran');
+    // console.log('`renderShoppingList` ran');
     const shoppingListItemsString = generateShoppingItemsString(STORE);
   
     // insert that HTML into the DOM
@@ -40,14 +40,14 @@ const STORE = [
   }
   
   function addItemToShoppingList(itemName) {
-    console.log(`Adding "${itemName}" to shopping list`);
+    // console.log(`Adding "${itemName}" to shopping list`);
     STORE.push({name: itemName, checked: false});
   }
   
   function handleNewItemSubmit() {
     $('#js-shopping-list-form').submit(function(event) {
       event.preventDefault();
-      console.log('`handleNewItemSubmit` ran');
+      // console.log('`handleNewItemSubmit` ran');
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
       addItemToShoppingList(newItemName);
@@ -56,7 +56,7 @@ const STORE = [
   }
   
   function toggleCheckedForListItem(itemIndex) {
-    console.log("Toggling checked property for item at index " + itemIndex);
+    // console.log("Toggling checked property for item at index " + itemIndex);
     STORE[itemIndex].checked = !STORE[itemIndex].checked;
   }
   
@@ -69,7 +69,7 @@ const STORE = [
   
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
-      console.log('`handleItemCheckClicked` ran');
+      // console.log('`handleItemCheckClicked` ran');
       const itemIndex = getItemIndexFromElement(event.currentTarget);
       toggleCheckedForListItem(itemIndex);
       renderShoppingList();
@@ -77,17 +77,16 @@ const STORE = [
   }
 
   function deleteListItem(itemIndex) {
-    console.log("Deleted item at index " + itemIndex);
+    // console.log("Deleted item at index " + itemIndex);
     STORE.splice(itemIndex, 1);
     console.log(STORE);
     //STORE[itemIndex].checked = !STORE[itemIndex].checked;
   }
   
   function handleDeleteItemClicked() {
-    // Listen for when users want to delete an item and 
-    // delete it
+    // Listen for when users want to delete an item and delete it
     $('.js-shopping-list').on('click', `.js-item-delete`, event => {
-        console.log('`handleDeleteItemClicked` ran');
+        // console.log('`handleDeleteItemClicked` ran');
         const itemIndex = getItemIndexFromElement(event.currentTarget);
         deleteListItem(itemIndex);
         renderShoppingList();
@@ -102,4 +101,3 @@ const STORE = [
   }
   
   $(handleShoppingList);
-  
