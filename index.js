@@ -14,7 +14,7 @@ function generateItemElement(item, itemIndex) {
     return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
       <form id="js-edit-item-form" class=${item.editing && !item.checked ? 'showEdit'  : 'hideEdit'}>
-        <input type="text" name="js-edit-item-entry" class="js-edit-item-entry" placeholder=${item.name}>
+        <input type="text" name="js-edit-item-entry" class="js-edit-item-entry" value=${item.name}>
         <button type="submit">Done</button>
       </form>
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''} 
