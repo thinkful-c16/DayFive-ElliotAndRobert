@@ -34,6 +34,7 @@ button:hover {
 }
 
 .shopping-list > li {
+  position: static;
   margin-bottom: 20px;
   padding: 20px;
   border: 1px solid darkgrey;
@@ -44,7 +45,7 @@ button:hover {
   color: purple;
   font-style: italic;
   font-size: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .shopping-item__checked {
@@ -68,9 +69,29 @@ button:hover {
   color: blue;
 }
 
-.editing {
-  color: darkgrey;
-  width: 200px;
-  padding: 5px;
-  border: 1px solid darkgrey;
+.showEdit {
+  position: relative;
+  top: -4px;
+  left: 0;
+  height: 34px;
+  width: 500px;
+  max-width: 600px;
+  display: normal;
+  margin-bottom: 10px;
 }
+
+.hideEdit {
+  display: none;
+}
+
+.showText {
+  position: relative;
+  top: -4px;
+  height: 34px;
+  display: normal;
+}
+
+.hideText {
+  display: none;
+}
+

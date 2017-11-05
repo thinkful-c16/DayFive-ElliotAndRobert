@@ -6,7 +6,6 @@ const STORE = [
   {name: "bread", checked: false, editing: false}
 ];
 let hideChecked = false;
-let nowEditing = false;
 
 function generateItemElement(item, itemIndex) {
   if(item.name === '' || (hideChecked === true && item.checked === true)) {
@@ -14,8 +13,12 @@ function generateItemElement(item, itemIndex) {
   } else {
     return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
+      <form id="js-edit-item-form" class=${item.editing && !item.checked ? 'showEdit'  : 'hideEdit'}>
+        <input type="text" name="js-edit-item-entry" class="js-edit-item-entry" placeholder=${item.name}>
+        <button type="submit">Done</button>
+      </form>
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''} 
-      ${nowEditing ? "editing" : ""}">${item.name}</span>
+      ${item.editing && !item.checked ? 'hideText'  : 'showText'}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle ${item.checked ? 'shopping-item-toggle__checked' : ''}">
           <span class="button-label">${item.checked ? 'uncheck' : 'check'}</span>
@@ -93,7 +96,7 @@ function handleDeleteItemClicked() {
   // Listen for when users want to delete an item and delete it
   $('.js-shopping-list').on('click', `.js-item-delete`, event => {
     // console.log('`handleDeleteItemClicked` ran');
-    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    let itemIndex = getItemIndexFromElement(event.currentTarget);
     deleteListItem(itemIndex);
     renderShoppingList();
   });
@@ -109,12 +112,17 @@ function handleToggleHideChecked() {
 
 function handleEditItemClicked() {
   $('.js-shopping-list').on('click', `.js-item-edit`, event => {
-    console.log('edit clicked');
-    nowEditing = true;
+    // console.log('edit clicked');
+    let itemIndex = getItemIndexFromElement(event.currentTarget)
+    toggleEditingListItem(itemIndex);
     renderShoppingList();
   });
 }
-  
+
+function toggleEditingListItem(itemIndex) {
+  STORE[itemIndex].editing = !STORE[itemIndex].editing;
+}
+
 function handleShoppingList() {
   renderShoppingList();
   handleNewItemSubmit();
