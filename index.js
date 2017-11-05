@@ -1,9 +1,9 @@
 'use strict';
 const STORE = [
-  {name: "apples", checked: false, editing: false},
-  {name: "oranges", checked: false, editing: false},
-  {name: "milk", checked: true, editing: false},
-  {name: "bread", checked: false, editing: false}
+//   {name: "apples", checked: false, editing: false},
+//   {name: "oranges", checked: false, editing: false},
+//   {name: "milk", checked: true, editing: false},
+//   {name: "bread", checked: false, editing: false}
 ];
 let hideChecked = false;
 
@@ -13,9 +13,9 @@ function generateItemElement(item, itemIndex) {
   } else {
     return `
     <li class="js-item-index-element" data-item-index="${itemIndex}">
-      <form id="js-edit-item-form" class=${item.editing && !item.checked ? 'showEdit'  : 'hideEdit'}>
-        <input type="text" name="js-edit-item-entry" class="js-edit-item-entry" value=${item.name}>
-        <button type="submit">Done</button>
+      <form class="js-edit-item-form-${itemIndex} ${item.editing && !item.checked ? 'showEdit'  : 'hideEdit'}">
+        <input type="text" name="js-edit-item-entry-${itemIndex}" class="js-edit-item-entry-${itemIndex}" value=${item.name}>
+        <button type="submit" class="js-edit-item-button">Done</button>
       </form>
       <span class="shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''} 
       ${item.editing && !item.checked ? 'hideText'  : 'showText'}">${item.name}</span>
@@ -70,7 +70,7 @@ function toggleCheckedForListItem(itemIndex) {
 }
   
 function getItemIndexFromElement(item) {
-  const itemIndexString = $(item)
+  let itemIndexString = $(item)
     .closest('.js-item-index-element')
     .attr('data-item-index');
   return parseInt(itemIndexString, 10);
@@ -79,7 +79,7 @@ function getItemIndexFromElement(item) {
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
     // console.log('`handleItemCheckClicked` ran');
-    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    let itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedForListItem(itemIndex);
     renderShoppingList();
   });
@@ -104,7 +104,7 @@ function handleDeleteItemClicked() {
 
 function handleToggleHideChecked() {
   $('#js-hide-checked').change(function(){
-    hideChecked = $(this).is(':checked')
+    hideChecked = $(this).is(':checked');
     // console.log(hideChecked);
     renderShoppingList();
   });
@@ -112,15 +112,23 @@ function handleToggleHideChecked() {
 
 function handleEditItemClicked() {
   $('.js-shopping-list').on('click', `.js-item-edit`, event => {
+    let itemIndex = getItemIndexFromElement(event.currentTarget);
     // console.log('edit clicked');
-    let itemIndex = getItemIndexFromElement(event.currentTarget)
-    toggleEditingListItem(itemIndex);
+    handleEditItemSubmit(itemIndex);
+    STORE[itemIndex].editing = !STORE[itemIndex].editing;
     renderShoppingList();
   });
 }
-
-function toggleEditingListItem(itemIndex) {
-  STORE[itemIndex].editing = !STORE[itemIndex].editing;
+  
+function handleEditItemSubmit(itemIndex) {
+  $('.js-shopping-list').submit(function(event) {
+    event.preventDefault();
+    console.log(itemIndex);
+    let newText = $(`.js-edit-item-entry-${itemIndex}`).val();
+    STORE[itemIndex].name = newText;
+    STORE[itemIndex].editing = false;
+    renderShoppingList();
+  });
 }
 
 function handleShoppingList() {
