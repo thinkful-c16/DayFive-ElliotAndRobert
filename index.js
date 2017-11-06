@@ -27,9 +27,9 @@ function addItemToShoppingList(itemName) {
 
 // 2: HideUnhide checked items.
 function ToggleHideCheckedItems(hideBoxChecked) {
-  // console.log('ToggleHideCheckedItems');
+  // console.log('Toggling Hide all checked items? property');
   hideChecked = hideBoxChecked;
-  $('#js-Hide-Unhide').text($(hideChecked ? 'Unhide' : 'Hide'));
+  $('#js-Hide-Unhide').text(hideChecked ? 'Unhide' : 'Hide');
   renderShoppingList();
 }
 
@@ -96,7 +96,8 @@ function generateItemElement(item, itemIndex) {
         <button type='submit' class='js-edit-item-button'>Done</button>
       </form>
       <span class='shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''} 
-      ${item.editing && !item.checked ? 'hideText'  : 'showText'}'>${item.name}</span>
+      ${item.editing && !item.checked ? 'hideText' : 'showText'}'>${item.name}<span class='a11y'>
+      ${STORE[itemIndex].checked ? ' checked' : ' unchecked'}</span></span>
       <div class='shopping-item-controls'>
         <button class='shopping-item-toggle js-item-toggle ${item.checked ? 'shopping-item-toggle__checked' : ''}'>
           <span class='button-label'>${item.checked ? 'uncheck' : 'check'}</span>
@@ -140,7 +141,8 @@ function handleNewItemSubmit() {
 function handleToggleHideChecked() {
   $('#js-hide-checked').change(function(){
     // console.log(hideChecked);
-    ToggleHideCheckedItems($(this).is(':checked'));
+    let hideBoxChecked = $(this).is(':checked');
+    ToggleHideCheckedItems(hideBoxChecked);
   });
 }
 

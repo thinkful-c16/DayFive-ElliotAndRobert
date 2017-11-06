@@ -95,3 +95,6 @@ button:hover {
   display: none;
 }
 
+.a11y {
+  opacity: 0.0;
+}
