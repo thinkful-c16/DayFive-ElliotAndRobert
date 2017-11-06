@@ -26,14 +26,10 @@ function addItemToShoppingList(itemName) {
 }
 
 // 2: HideUnhide checked items.
-function ToggleHideCheckedItems(hideBool) {
-  console.log('ToggleHideCheckedItems');
-  hideChecked = hideBool;
-  if(hideChecked) {
-    $('#js-Hide-Unhide').text('Unhide');
-  } else {
-    $('#js-Hide-Unhide').text('Hide');
-  }
+function ToggleHideCheckedItems(hideBoxChecked) {
+  // console.log('ToggleHideCheckedItems');
+  hideChecked = hideBoxChecked;
+  $('#js-Hide-Unhide').text($(hideChecked ? 'Unhide' : 'Hide'));
   renderShoppingList();
 }
 
